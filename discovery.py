@@ -13,7 +13,7 @@ def create_host_file(args):
     return f'{args.outfile}_live.txt'
 
 def scan(args, filename):
-    os.system(f"nmap -Pn -p- -O -sV {args.nmapopt} --version-light --reason --open -T4 -g 80 -oX {args.outfile}.xml -iL {filename}")
+    os.system(f"nmap -Pn -p- -O -sV {args.nmapopt} --version-light --reason --open -T4 -oX {args.outfile}.xml -iL {filename}")
 
 def udp(args, filename):
     os.system(f"nmap -Pn -p- {args.nmapopt} -sU -oX {args.outfile}.xml -iL {filename}")
