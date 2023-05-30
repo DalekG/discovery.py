@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 
 def ping_sweep(args):
-    os.system(f"nmap {args.ip_or_file} -sn -g 80 -T4 -oG {args.outfile}_ping")
+    os.system(f"nmap {args.ip_or_file} -sn -T4 -oG {args.outfile}_ping")
 
 def create_host_file(args):
     os.system(f"grep 'Up' {args.outfile}_ping | cut -f 2 -d ' ' >> {args.outfile}_live.txt")
