@@ -15,6 +15,9 @@ def create_host_file(args):
 def scan(args, filename):
     os.system(f"nmap -Pn -p- -O -sV {args.nmapopt} --version-light --reason --open -T4 -g 80 -oX {args.outfile}.xml -iL {filename}")
 
+def udp(args, filename):
+    os.system(f"nmap -Pn -p- {args.nmapopt} -sU -oX {args.outfile}.xml -iL {filename}")
+
 def create_csv(args):    
     tree = ET.parse(f'{args.outfile}.xml')
     root = tree.getroot()
@@ -59,11 +62,12 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(
 	        prog='discovery.py',
 	        description="Helps automate the discovery scanning phase of a PenTest. Discovery.py will perform a ping sweep, create a live host file, conduct an nmap scan of live hosts, and convert output to a csv file by default.",
-	        usage="python3 discovery.py ip_or_file [-h] [-f filename] [-n '-/--nmapOption']"
+	        usage="python3 discovery.py ip_or_file [-h] [-f filename] [-n '-sT --example']"
 	        )
 	parser.add_argument("ip_or_file", help="the ip address, cidr notation, or pre-generated livehost file of what you want to scan",)
 	parser.add_argument("-f", dest="outfile", type=str, help="desired filename scheme (i.e. 192.168_etc_etc)", metavar="filename", required=True)
 	parser.add_argument("-n", dest="nmapopt", type=str, help="specify scan type such as -sS/T/U/V/C; default runs sS; use this to add any other options as well", default="-sS", metavar="'-sE --example'", required=False)
+	parser.add_argument("-u", dest="udp", action='store_true', help="run a UDP scan", metavar="udp", required=False)
 	args = parser.parse_args()                                 
 
 	live_host=""
@@ -73,6 +77,10 @@ if __name__ == '__main__':
 		#ping sweep, create live_host
 		ping_sweep(args)
 		live_host = create_host_file(args)
-		
-	scan(args, live_host)
+	
+	if args.udp:
+		udp(args, live_host)
+	else:
+		scan(args, live_host)
+	
 	create_csv(args)
