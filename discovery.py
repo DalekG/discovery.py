@@ -67,7 +67,7 @@ if __name__ == '__main__':
 	parser.add_argument("ip_or_file", help="the ip address, cidr notation, or pre-generated livehost file of what you want to scan",)
 	parser.add_argument("-f", dest="outfile", type=str, help="desired filename scheme (i.e. 192.168_etc_etc)", metavar="filename", required=True)
 	parser.add_argument("-n", dest="nmapopt", type=str, help="specify scan type such as -sS/T/U/V/C; default runs sS; use this to add any other options as well", default="-sS", metavar="'-sE --example'", required=False)
-	parser.add_argument("-u", dest="udp", action='store_true', help="run a UDP scan", metavar="udp", required=False)
+	parser.add_argument("-u", dest="udp", action='store_true', help="run a UDP scan", required=False)
 	args = parser.parse_args()                                 
 
 	live_host=""
