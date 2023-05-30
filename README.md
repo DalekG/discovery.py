@@ -8,7 +8,7 @@ Requirements:
 - run as root level user
 
 How to use:\
-`python3 discovery.py ip_or_host [-h] [-f filename] [-n '-sE/--example]`
+`python3 discovery.py ip_or_host [-h] [-f filename] [-n '-sU --max-retries=0']`
 
 - Nmap output will be supplied to the terminal window you executed the script, the script will not complete until all phases have finished executing.
 - You can check the status of the scans by hitting a key during the execution
