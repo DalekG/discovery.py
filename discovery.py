@@ -42,7 +42,7 @@ def create_csv(args):
             for port in host.findall('.//ports/port'):
                 portid = port.get('portid')
                 proto = port.get('protocol')
-                service = port.find('.//service').get('name') if port.find('.//service') is not None else 'unkown'
+                service = port.find('.//service').get('name') if port.find('.//service') is not None else 'unknown'
                 product = port.find('.//service').get('product') if port.find('.//service') is not None else ''
 
                 writer.writerow({'Sort': ip_dict[ip], 
